@@ -1,0 +1,531 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neutral-01: #ffffff;
+  --neutral-02: #c8ddf1;
+  --neutral-03: #9d89fc;
+  --neutral-04: #000000;
+  --color-01: #e9fa49;
+  --color-02: #ff8f27;
+  --color-03: #ff4f3f;
+  --color-04: #1cb785;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--neutral-04);
+    font-size: 18px;
+    line-height: 170%;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(82px, 9vw, 120px);
+    line-height: 100%;
+    letter-spacing: -2px;
+  }
+
+  h2 {
+    font-size: 80px;
+    line-height: 104%;
+    letter-spacing: -1.5px;
+  }
+
+  h3 {
+    font-size: 68px;
+    line-height: 110%;
+  }
+
+  h4 {
+    font-size: 28px;
+    line-height: 140%;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .container-main {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-padding {
+    padding: 120px 30px;
+  }
+
+  .padding-bottom {
+    padding: 0 30px 120px;
+  }
+}
+
+/* ==== DISPLAY H1 (matches .dislplay-h1) ==== */
+.display-h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(82px, 10vw, 140px);
+  line-height: 115%;
+  text-transform: uppercase;
+}
+
+/* ==== ANIMATION KEYFRAMES ==== */
+
+/* Slow vertical float for plus icons & decorative shapes */
+@keyframes float-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes float-y-reverse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(12px);
+  }
+}
+
+@keyframes float-y-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Continuous rotation for sticker badge */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Subtle pulse for star shapes */
+@keyframes pulse-subtle {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+/* ── UGC Video Marquee Animations ── */
+@keyframes scroll-marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: scroll-marquee-right 60s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ── Brand Logo Marquee Animations ── */
+@keyframes scroll-marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: scroll-marquee-left 90s linear infinite;
+}
+
+/* Rotate + float combo */
+@keyframes rotate-float {
+
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(5deg) translateY(-10px);
+  }
+}
+
+.animate-float-y {
+  animation: float-y 3s ease-in-out infinite;
+}
+
+.animate-float-y-reverse {
+  animation: float-y-reverse 3.5s ease-in-out infinite;
+}
+
+.animate-float-y-slow {
+  animation: float-y-slow 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-rotate-float {
+  animation: rotate-float 4s ease-in-out infinite;
+}
+
+/* ==== HERO EXACT CLASSES ==== */
+.hero-header-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hero-title-01-wrapper {
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+.hero-title-02-wrapper {
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.hero-title-03-wrapper {
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+.hero-title-image-wrapper {
+  object-fit: cover;
+  width: 20%;
+  max-width: 180px;
+  margin-top: -2%;
+  margin-left: -1%;
+  position: relative;
+}
+
+.hero-title-image {
+  width: 100%;
+}
+
+.hero-title-image-icon {
+  width: 17%;
+  position: absolute;
+  top: 23%;
+  left: -5px;
+}
+
+.hero-title-icon-01 {
+  width: 9%;
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+}
+
+.hero-title-icon-02 {
+  width: 12%;
+  position: absolute;
+  top: 8px;
+  left: -18px;
+}
+
+.hero-title-icon-03 {
+  width: 10%;
+  position: absolute;
+  bottom: 40px;
+  right: -12px;
+}
+
+.hero-title-icon-04 {
+  width: 7%;
+  position: absolute;
+  top: -15px;
+  left: 0;
+}
+
+.hero-title-icon-05 {
+  width: 8%;
+  position: absolute;
+  top: 5px;
+  left: -2px;
+}
+
+.hero-title-icon-06 {
+  width: 4%;
+  position: absolute;
+  top: 35%;
+  right: -5px;
+}
+
+.hero-title-icon-07 {
+  width: 5%;
+  position: absolute;
+  top: -5px;
+  right: 15%;
+  /* Over 'I' */
+}
+
+.hero-shape-002 {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 16%;
+}
+
+.hero-sticker {
+  position: absolute;
+  top: -15%;
+  right: 10%;
+  max-width: 140px;
+}
+
+/* ==== BUTTON ICON ANIMATION ==== */
+.button-icon-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.button-icon-normal {
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.button-icon-hover {
+  position: absolute;
+  transform: translate3d(-150%, 0, 0);
+  transition: transform 0.4s ease;
+}
+
+.group:hover .button-icon-normal {
+  transform: translate3d(150%, 0, 0);
+}
+
+.group:hover .button-icon-hover {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Service button icon animation */
+.service-btn-icon-normal {
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.service-btn-icon-hover {
+  position: absolute;
+  transform: translate3d(-100%, 100%, 0);
+  transition: transform 0.4s ease;
+}
+
+.group:hover .service-btn-icon-normal {
+  transform: translate3d(100%, -100%, 0);
+}
+
+.group:hover .service-btn-icon-hover {
+  transform: translate3d(0, 0, 0);
+}
+
+/* ==== SCROLL ANIMATION BASE ==== */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scrollbar hide */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==== RESPONSIVE BREAKPOINTS (from Webflow source) ==== */
+
+/* Tablet: 991px */
+@media screen and (max-width: 991px) {
+  .display-h1 {
+    font-size: clamp(62px, 8.5vw, 82px);
+  }
+
+  h1 {
+    font-size: clamp(62px, 8.5vw, 82px);
+  }
+
+  h2 {
+    font-size: 60px;
+  }
+
+  h3 {
+    font-size: 48px;
+  }
+
+  .section-padding {
+    padding: 80px 30px;
+  }
+
+  .padding-bottom {
+    padding: 0 30px 80px;
+  }
+
+  .hero-title-icon-02 {
+    top: 2px;
+    left: -6px;
+  }
+
+  .hero-title-icon-03 {
+    bottom: 5px;
+    right: -7px;
+  }
+
+  .hero-title-icon-04 {
+    bottom: -2px;
+    right: -17px;
+  }
+
+  .hero-title-icon-05 {
+    width: 8%;
+    top: -15px;
+    left: -8px;
+  }
+
+  .hero-title-image-wrapper {
+    width: 18%;
+    margin-top: -4%;
+  }
+}
+
+/* Small tablet: 767px */
+@media screen and (max-width: 767px) {
+  .display-h1 {
+    font-size: clamp(48px, 8vw, 62px);
+  }
+
+  h1 {
+    font-size: clamp(48px, 8vw, 62px);
+  }
+
+  h2 {
+    font-size: 48px;
+  }
+
+  h3 {
+    font-size: 42px;
+  }
+
+  h4 {
+    font-size: 24px;
+  }
+
+  .section-padding {
+    padding: 60px 20px;
+  }
+
+  .padding-bottom {
+    padding: 0 20px 60px;
+  }
+}
+
+/* Mobile: 479px */
+@media screen and (max-width: 479px) {
+  .display-h1 {
+    font-size: 48px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 38px;
+  }
+
+  h3 {
+    font-size: 36px;
+  }
+
+  h4 {
+    font-size: 22px;
+  }
+}
