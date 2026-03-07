@@ -15,7 +15,7 @@ import ComparisonTable from './components/ComparisonTable';
 
 function App() {
   return (
-    <div className="bg-neutral-01 min-h-screen font-sans">
+    <div className="bg-neutral-01 min-h-screen font-sans overflow-x-hidden">
       <Header />
       <Hero />
       <UGCMarquee />

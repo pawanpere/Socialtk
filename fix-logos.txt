@@ -1,0 +1,1 @@
+Please drag and drop those two logo files into the public/ folder.

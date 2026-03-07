@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+/* font-display: swap is enforced through the &display=swap query param above */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -178,7 +180,7 @@
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: scroll-marquee-right 60s linear infinite;
+  animation: scroll-marquee-right 40s linear infinite;
 }
 
 .animate-marquee:hover {
@@ -199,7 +201,7 @@
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: scroll-marquee-left 90s linear infinite;
+  animation: scroll-marquee-left 60s linear infinite;
 }
 
 /* Rotate + float combo */

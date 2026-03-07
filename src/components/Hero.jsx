@@ -12,7 +12,7 @@ const A = {
     icon03: '/assets/6858db3d92470242cda7af37_Vector%20(4).svg',
     icon06: '/assets/6858db3d92470242cda7af3a_Vector%20(7).svg',
     icon05: '/assets/6858db3d92470242cda7af39_Vector%20(6).svg',
-    sticker: '/STK_sticker-removebg.png',
+    sticker: '/STK_sticker-removebg.webp',
     helix: '/assets/6858db3d92470242cda7aff5_Helix%20(1).svg',
     icon07: '/assets/6858db3d92470242cda7aff6_Vector%20(28).svg',
     counterArrow: '/assets/6858db3d92470242cda7af3f_Vector%20(9).svg',
@@ -33,10 +33,11 @@ const fadeInUp = {
 const Hero = () => {
     return (
         <section className="bg-white relative overflow-hidden
-      pt-[20px] pb-[20px]
-      max-[991px]:pt-[10px] max-[991px]:pb-[10px]
-      max-[767px]:pt-[10px] max-[767px]:pb-[10px]
-      px-[30px] max-[767px]:px-[20px]">
+      pt-[120px] pb-[80px]
+      max-[991px]:pt-[80px] max-[991px]:pb-[60px]
+      max-[767px]:pt-[20px] max-[767px]:pb-[10px]
+      px-[30px] max-[767px]:px-[20px]
+      min-h-[calc(100vh-90px)] max-[767px]:min-h-0 flex flex-col justify-center">
             <div className="container-main">
                 {/* ═══ MAIN CONTENT WRAPPER ═══ */}
                 <div className="flex flex-col items-center text-center gap-[30px]
@@ -46,19 +47,7 @@ const Hero = () => {
                     <div className="flex flex-col items-center gap-[30px]
             max-[991px]:gap-[20px] w-full">
 
-                        {/* Label: "#1 Popular Digital Marketing Agency" */}
-                        <motion.div
-                            className="flex items-center justify-center gap-2"
-                            initial="hidden"
-                            animate="visible"
-                            variants={fadeInUp}
-                            custom={0}
-                        >
-                            <img src={A.labelIcon} alt="" className="w-5 h-5 max-[479px]:w-4 max-[479px]:h-4" />
-                            <p className="text-[var(--neutral-04)] font-medium text-[18px] max-[767px]:text-[16px]">
-                                Official Partners of Cruva, Refunnel & TikTok Shop
-                            </p>
-                        </motion.div>
+
 
                         {/* ── HERO HEADER (Exact Webflow Structure) ── */}
                         <motion.div
@@ -83,7 +72,7 @@ const Hero = () => {
                                 </h1>
                                 {/* Image / Video */}
                                 <div className="hero-title-image-wrapper mx-4 max-[767px]:mx-1 max-[767px]:w-[60px] max-[767px]:!m-0">
-                                    <video src="/Images for social TK/Hero Video.mp4" autoPlay loop muted playsInline className="hero-title-image object-cover rounded-[24px] max-[767px]:rounded-[12px] -rotate-3 shadow-2xl" />
+                                    <video src="/Images for social TK/Hero Video.webm" autoPlay loop muted playsInline className="hero-title-image object-cover rounded-[24px] max-[767px]:rounded-[12px] -rotate-3 shadow-2xl" />
                                     <img src={A.portraitIcon} alt="" className="hero-title-image-icon animate-spin-slow max-[767px]:w-[16px] max-[767px]:-left-[10px]" />
                                 </div>
                                 {/* LEADER */}
@@ -95,7 +84,7 @@ const Hero = () => {
                             {/* Row 3 */}
                             <div className="hero-title-03-wrapper flex justify-center w-full">
                                 <h1 className="display-h1 hero-title text-[var(--neutral-04)] relative inline-block">
-                                    WITHIN MONTHS
+                                    WITHIN MONTHS.
                                 </h1>
                             </div>
 

@@ -3,17 +3,17 @@ import { ScrollReveal } from '../hooks/useScrollAnimation';
 
 const WhyChooseUs = () => {
     return (
-        <section id="about" className="padding-bottom">
+        <section id="about" className="padding-bottom overflow-hidden">
             <div className="container-main">
                 <div className="flex flex-col gap-[80px] max-[767px]:gap-[40px]">
                     <ScrollReveal>
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-[24px]">
                             <div className="flex flex-col gap-4 max-w-[800px]">
-                                <h4 className="text-[var(--color-02)] uppercase">Why Social TK</h4>
+                                <h4 className="text-[var(--color-02)] uppercase">Why SocialTK</h4>
                                 <h2>Two People Run Your Account. Both Built This Company.</h2>
                             </div>
                             <p className="text-[var(--neutral-04)]/80 max-w-[365px] max-[991px]:max-w-full leading-[170%]">
-                                Most agencies pitch you the dream team, then hand you off to a junior handling 15 other brands. We're Sayim & Danny. An in-house team at in-house prices. We touch every client, every day.
+                                Most agencies pitch you the dream team, then hand you off to a junior hire handling 10 other brands. We're Sayim & Danny. An in-house team WITHOUT in-house charges.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -22,12 +22,12 @@ const WhyChooseUs = () => {
                         <ScrollReveal className="flex flex-col gap-[32px] max-[479px]:gap-[24px] w-full min-[992px]:w-[25%] items-start text-left">
                             <div className="flex flex-col gap-[10px]">
                                 <h4>Founder-Led Execution</h4>
-                                <p>We stay small on purpose, only a handful of brands at a time, so every account gets our full attention. No juniors. No outsourced teams. No handoffs. Your baby is our baby.</p>
+                                <p>Every account gets our full attention. No juniors. No outsourced teams. No handoffs. Your baby is our baby.</p>
                             </div>
                             <div className="relative rounded-[24px] p-[24px] pb-[44px] pr-[60px] w-full bg-no-repeat" style={{ backgroundColor: 'var(--neutral-03)', backgroundImage: "url('/assets/6858db3d92470242cda7af44_Vector%204%20(2).svg'), url('/assets/6858db3d92470242cda7af45_Vector%203%20(1).svg')", backgroundPosition: '28% 101%, 72% -1%', backgroundSize: '16%, 16%' }}>
                                 <div className="flex flex-col max-w-[150px]">
-                                    <p className="text-[40px] font-black leading-[110%] text-white">Few</p>
-                                    <p className="text-white text-[14px] font-medium mt-1">Select Brands at Any Time</p>
+                                    <p className="text-[40px] font-black leading-[110%] text-white">Your Brand</p>
+                                    <p className="text-white text-[14px] font-medium mt-1">Our Obsession</p>
                                 </div>
                                 <img src="/assets/6858db3d92470242cda7af46_Vector (11).svg" alt="" className="absolute top-[24px] right-[23px]" />
                             </div>
@@ -44,9 +44,9 @@ const WhyChooseUs = () => {
                                     maskSize: "100% 100%",
                                     maskRepeat: "no-repeat",
                                 }}>
-                                    <img src="/Images for social TK/Sayim.jpg" alt="Sayim" className="w-full h-full object-cover" />
+                                    <img src="/Images for social TK/Sayim.webp" alt="Sayim" className="w-full h-full object-cover" loading="lazy" />
                                 </div>
-                                <img src="/Images for social TK/Sayim_name_sticker-removebg-preview.png" alt="Sayim Sticker" className="absolute bottom-4 left-[-10px] w-[120px] max-[767px]:w-[90px] animate-spin-slow z-10 hover:[animation-play-state:paused]" />
+                                <img src="/Images for social TK/Sayim_name_sticker-removebg-preview.webp" alt="Sayim Sticker" className="absolute bottom-4 left-[-10px] w-[120px] max-[767px]:w-[90px] animate-spin-slow z-10 hover:[animation-play-state:paused]" loading="lazy" />
                             </div>
 
                             {/* Right Column: Danny */}
@@ -59,16 +59,16 @@ const WhyChooseUs = () => {
                                     maskSize: "100% 100%",
                                     maskRepeat: "no-repeat",
                                 }}>
-                                    <img src="/Images for social TK/Danny.jpg" alt="Danny" className="w-full h-full object-cover" />
+                                    <img src="/Images for social TK/Danny.webp" alt="Danny" className="w-full h-full object-cover" loading="lazy" />
                                 </div>
-                                <img src="/Images for social TK/Danny_name_sticker-removebg-preview.png" alt="Danny Sticker" className="absolute bottom-4 left-[-10px] w-[120px] max-[767px]:w-[90px] animate-spin-slow z-10 hover:[animation-play-state:paused]" />
+                                <img src="/Images for social TK/Danny_name_sticker-removebg-preview.webp" alt="Danny Sticker" className="absolute bottom-4 left-[-10px] w-[120px] max-[767px]:w-[90px] animate-spin-slow z-10 hover:[animation-play-state:paused]" loading="lazy" />
                             </div>
                         </ScrollReveal>
 
                         <ScrollReveal className="flex flex-col gap-[32px] max-[479px]:gap-[24px] w-full min-[992px]:w-[25%] items-start text-left" delay={0.2}>
                             <div className="flex flex-col gap-[10px]">
                                 <h4>Zero-Risk Partnership</h4>
-                                <p>30-day exit clause. No 6-month lock-ins. Without handcuffs, we make it easy to leave because brands don't leave when you're printing money.</p>
+                                <p>30-day exit clause. No 6-month lock-ins. Without handcuffs, we make it risk free because we trust our process.</p>
                             </div>
                             <div className="relative rounded-[24px] p-[24px] pb-[44px] pr-[60px] w-full bg-no-repeat" style={{ backgroundColor: 'var(--color-03)', backgroundImage: "url('/assets/6858db3d92470242cda7af44_Vector%204%20(2).svg'), url('/assets/6858db3d92470242cda7af45_Vector%203%20(1).svg')", backgroundPosition: '28% 101%, 72% -1px', backgroundSize: '16%, 16%' }}>
                                 <div className="flex flex-col max-w-[150px]">

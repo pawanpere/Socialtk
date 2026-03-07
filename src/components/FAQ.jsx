@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ScrollReveal } from '../hooks/useScrollAnimation';
 
 const faqs = [
-    { question: "What's the TikTok Shop probation period?", answer: "Your favourite agencies won't tell you this, TikTok caps new shops on orders, listings, and payouts. We specialize in graduating you past these restrictions, typically in under 45 days. Without handcuffs." },
-    { question: "I've been burned by agencies before.", answer: "We get it. We're two founders, not a 50-person agency. No juniors touch your account. Your baby is our baby. And our 30-day exit clause means you're never locked in, without handcuffs." },
+    { question: "What's the TikTok Shop probation period?", answer: "Your favourite agencies won't tell you this, TikTok caps new shops on orders, listings, and payouts. We specialize in graduating you past these restrictions, typically in under 90 days. Without handcuffs." },
+    { question: "I've been burned by agencies before.", answer: "We get it. We're two founders, not a 50-person agency. Your baby is our baby. And our 30-day exit clause means you're never locked in, without handcuffs." },
     { question: "How is TikTok Shop different from traditional UGC?", answer: "UGC is a flat fee for a one-off post with no performance guarantee. TikTok Shop affiliates are commission-based, creators posting multiple times a day, on repeat. It's a completely different ecosystem. Better economics, way more content." },
     { question: "How soon will I see results?", answer: "Most brands have a fully operational TikTok Shop by day 30, real traction by month 2, and hit consistent mature orders by month 3. The flywheel starts racking in sales once creator content feeds ads and discovery kicks in." }
 ];

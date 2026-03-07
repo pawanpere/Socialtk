@@ -30,6 +30,7 @@ const Projects = () => {
                                         src="/Images for social TK/Results/0_-_50kmonth_in_less_than_45_days.webp"
                                         alt="Hero Result"
                                         className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
                                     <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
@@ -46,9 +47,10 @@ const Projects = () => {
                                         onClick={() => setSelectedImage("/Images for social TK/Results/Screenshot_2026-02-26_223725.png")}
                                     >
                                         <img
-                                            src="/Images for social TK/Results/Screenshot_2026-02-26_223725.png"
+                                            src="/Images for social TK/Results/Screenshot_2026-02-26_223725.webp"
                                             alt="Small Result 1"
                                             className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                                            loading="lazy"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
                                         <div className="absolute inset-0 flex flex-col justify-end p-6 pointer-events-none">
@@ -62,14 +64,15 @@ const Projects = () => {
                                         onClick={() => setSelectedImage("/Images for social TK/Results/Screenshot_2026-03-01_at_5.28.01_PM.png")}
                                     >
                                         <img
-                                            src="/Images for social TK/Results/Screenshot_2026-03-01_at_5.28.01_PM.png"
+                                            src="/Images for social TK/Results/Screenshot_2026-03-01_at_5.28.01_PM.webp"
                                             alt="Small Result 2"
                                             className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                                            loading="lazy"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
                                         <div className="absolute inset-0 flex flex-col justify-end p-6 pointer-events-none">
                                             <h3 className="font-display text-white text-xl md:text-2xl mb-1 drop-shadow-md">4X ROI · $9.45 CPA</h3>
-                                            <p className="font-sans text-gray-300 text-xs md:text-sm drop-shadow-sm">Centurion Labz · 30 Orders from $283 Spend</p>
+                                            <p className="font-sans text-gray-300 text-xs md:text-sm drop-shadow-sm">30 Orders from $283 Spend</p>
                                         </div>
                                     </div>
                                 </div>
@@ -119,14 +122,15 @@ const Projects = () => {
                                     onClick={() => setSelectedImage("/Images for social TK/Results/Screenshot_2026-02-24_180218.png")}
                                 >
                                     <img
-                                        src="/Images for social TK/Results/Screenshot_2026-02-24_180218.png"
+                                        src="/Images for social TK/Results/Screenshot_2026-02-24_180218.webp"
                                         alt="Large Result 2"
                                         className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
                                     <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
-                                        <h3 className="font-display text-white text-3xl md:text-4xl mb-2 drop-shadow-md">$163K+ GMV Category Rank #5</h3>
-                                        <p className="font-sans text-gray-300 text-sm md:text-base drop-shadow-sm">15,613 Orders · 628% Growth · Swanson Health</p>
+                                        <h3 className="font-display text-white text-3xl md:text-4xl mb-2 drop-shadow-md">$163K+ GMV MOVED 5 POINTS UP IN CATEGORY</h3>
+                                        <p className="font-sans text-gray-300 text-sm md:text-base drop-shadow-sm">15,613 Orders · 628% Growth</p>
                                     </div>
                                 </div>
                                 {/* Card 7 (MEDIUM): col-span-5 */}
@@ -135,14 +139,15 @@ const Projects = () => {
                                     onClick={() => setSelectedImage("/Images for social TK/Results/image_4.png")}
                                 >
                                     <img
-                                        src="/Images for social TK/Results/image_4.png"
+                                        src="/Images for social TK/Results/image_4.webp"
                                         alt="Medium Result 3"
                                         className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
                                     <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
                                         <h3 className="font-display text-white text-2xl md:text-3xl mb-2 drop-shadow-md">The Amazon Halo Effect</h3>
-                                        <p className="font-sans text-gray-300 text-sm md:text-base drop-shadow-sm">$92,425 Amazon Sales · 8,594 Units · Swanson Spearmint Leaf</p>
+                                        <p className="font-sans text-gray-300 text-sm md:text-base drop-shadow-sm">$92,425 Amazon Sales · 8,594 Units</p>
                                     </div>
                                 </div>
                             </div>

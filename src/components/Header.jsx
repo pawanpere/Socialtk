@@ -9,7 +9,7 @@ const Header = () => {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <a href="/" className="z-[9999] w-full max-w-[160px] block shrink-0 pl-0">
-                        <img src="/socialtk_logo-transparent.png" alt="Social TK Logo" className="w-full object-contain" />
+                        <img src="/socialtk_logo-transparent.webp" alt="SocialTK Logo" className="w-full object-contain" />
                     </a>
 
                     {/* Desktop Navigation */}

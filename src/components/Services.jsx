@@ -4,15 +4,15 @@ import { ScrollReveal } from '../hooks/useScrollAnimation';
 const servicesData = [
     { title: 'TikTok Shop Setup & Daily Ops', desc: "Listings, compliance, keywords, reviews built from zero. You'll never open Seller Center again. Your baby is our baby.", bgColor: '#ff8f27', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7afb0_right-up%201.svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
     { title: 'Creator Recruitment at Scale', desc: '2,000+ outreach messages per week. Every creator handpicked, vetted, and shipped your product. Not one-off posts, creators posting on repeat.', bgColor: '#9d89fc', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7afce_right-up%201%20(1).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
-    { title: 'Brand Discord Community', desc: 'Your own creator army in a private Discord. Contests, incentives, and daily training keep them posting without handcuffs.', bgColor: '#ff4f3f', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7afe7_right-up%201%20(2).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
+    { title: 'Branded Discord Community', desc: 'Your own creator army in a private Discord. Contests, incentives, and daily training to keep them posting without handcuffs.', bgColor: '#ff4f3f', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7afe7_right-up%201%20(2).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
     { title: 'GMV Max Ads Management', desc: 'Ads run on your best creator content. Fresh videos daily means zero creative fatigue. The flywheel starts racking in sales.', bgColor: '#e9fa49', textColor: '#051a2f', descColor: '#051a2f', btnBg: '#051a2f', icon: '/assets/6858db3d92470242cda7b005_right-up%201%20(3).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
-    { title: 'Probation Graduation', desc: "Your favourite agencies won't tell you this, TikTok caps new shops with order limits, listing restrictions, and delayed payouts. We break you through in under 45 days.", bgColor: '#1cb785', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7b019_right-up%201%20(4).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
+    { title: 'Probation Graduation', desc: "Your favourite agencies won't tell you this, TikTok caps new shops with order limits, listing restrictions, and delayed payouts. We break you through in under 90 days.", bgColor: '#1cb785', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7b019_right-up%201%20(4).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
     { title: 'The Amazon Halo Effect', desc: 'Discovery that lifts Amazon, Shopify, and retail. ~1 Amazon sale for every 3 TikTok Sales.', bgColor: '#051a2f', textColor: 'white', descColor: 'rgba(255,255,255,0.8)', btnBg: 'white', icon: '/assets/6858db3d92470242cda7b022_right-up%201%20(5).svg', href: 'https://calendly.com/sayspeedy/socialtk-discovery-call' },
 ];
 
 const Services = () => {
     return (
-        <section id="services" className="padding-bottom relative">
+        <section id="services" className="pb-8 relative px-[30px] max-[767px]:px-[20px] overflow-hidden">
             <div className="container-main">
                 <div className="flex flex-col gap-[80px] max-[767px]:gap-[40px]">
                     {/* Header */}
@@ -23,7 +23,7 @@ const Services = () => {
                                 <h2>You Run Your Brand. We Run TikTok Shop.</h2>
                             </div>
                             <p className="text-[var(--neutral-04)]/80 max-w-[365px] max-[991px]:max-w-full leading-[170%]">
-                                An in-house team at in-house prices. Everything from cold start to category leader handled by two founders, not a team of juniors.
+                                An in-house team WITHOUT in-house charges. Everything from cold start to category leader handled by two founders, not a team of juniors.
                             </p>
                         </div>
                     </ScrollReveal>

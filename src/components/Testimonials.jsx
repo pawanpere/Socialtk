@@ -5,7 +5,7 @@ const Testimonials = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     return (
-        <section className="padding-bottom pt-10">
+        <section className="padding-bottom pt-10 overflow-hidden">
             <div className="container-main">
                 <ScrollReveal>
                     <div className="flex flex-col gap-[60px] max-[767px]:gap-[40px] items-center text-center">
@@ -15,33 +15,37 @@ const Testimonials = () => {
                             {/* Line 1: Marshall (1) & Trevor $300 (4) */}
                             <div className="grid grid-cols-5 gap-4 w-full">
                                 <img
-                                    src="/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.01.35_PM.png"
+                                    src="/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.01.35_PM.webp"
                                     alt="Testimonial 1 - Marshall"
-                                    onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.01.35_PM.png')}
+                                    onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.01.35_PM.webp')}
                                     className="col-span-3 w-full h-auto rounded-[12px] shadow-lg object-contain cursor-pointer transition-transform hover:scale-[1.02]"
+                                    loading="lazy"
                                 />
                                 <img
-                                    src="/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.25_PM.png"
+                                    src="/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.25_PM.webp"
                                     alt="Testimonial 4 - Trevor $300"
-                                    onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.25_PM.png')}
+                                    onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.25_PM.webp')}
                                     className="col-span-2 w-full h-auto rounded-[12px] shadow-lg object-contain cursor-pointer transition-transform hover:scale-[1.02]"
+                                    loading="lazy"
                                 />
                             </div>
 
                             {/* Line 2: Michael (3) */}
                             <img
-                                src="/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.02.02_PM.png"
+                                src="/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.02.02_PM.webp"
                                 alt="Testimonial 3 - Michael"
-                                onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.02.02_PM.png')}
+                                onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-02-28_at_1.02.02_PM.webp')}
                                 className="w-full h-auto rounded-[12px] shadow-lg object-contain cursor-pointer transition-transform hover:scale-[1.02]"
+                                loading="lazy"
                             />
 
                             {/* Line 3: Trevor Great ROI (2) */}
                             <img
-                                src="/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.09_PM.png"
+                                src="/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.09_PM.webp"
                                 alt="Testimonial 2 - Trevor ROI"
-                                onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.09_PM.png')}
+                                onClick={() => setSelectedImage('/Images for social TK/Testimonials/Screenshot_2026-03-01_at_5.28.09_PM.webp')}
                                 className="w-full h-auto rounded-[12px] shadow-lg object-contain cursor-pointer transition-transform hover:scale-[1.02]"
+                                loading="lazy"
                             />
                         </div>
                     </div>

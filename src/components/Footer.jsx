@@ -24,15 +24,15 @@ const Footer = () => {
             <div className="container-main">
                 <div className="flex flex-col max-[767px]:flex-col min-[768px]:flex-row justify-between items-start gap-[100px] max-[767px]:gap-[40px]">
                     <ScrollReveal className="flex flex-col gap-[32px] items-start w-full min-[768px]:max-w-[700px]">
-                        <a href="/" className="block"><img src="/socialtk_logo-transparent.png" alt="Social TK Logo" className="w-full max-w-[190px]" /></a>
+                        <a href="/" className="block"><img src="/socialtk_logo-transparent.webp" alt="SocialTK Logo" className="w-full max-w-[190px]" loading="lazy" /></a>
                         <p className="text-[var(--neutral-04)]/80 leading-[170%] text-[22px] max-[767px]:text-[18px]">Two founders. Your entire TikTok Shop. No middlemen.</p>
 
                         <div className="flex flex-col mt-4">
                             <h4 className="text-[var(--neutral-04)] font-black text-[36px] max-[479px]:text-[32px] tracking-normal uppercase mb-5 block" style={{ fontFamily: "'Anton', sans-serif" }}>PARTNERS</h4>
                             <div className="flex items-center gap-6 flex-wrap mt-2">
-                                <img src="/footer_logos/Cruva Logo.png" alt="Cruva" className="h-[60px] w-auto object-contain" />
-                                <img src="/footer_logos/Refunnel Logo.png" alt="Refunnel" className="h-[60px] w-auto object-contain" />
-                                <img src="/footer_logos/TikTok Shop Logo.png" alt="TikTok Shop" className="h-[65px] w-auto object-contain" />
+                                <img src="/footer_logos/Cruva Logo.webp" alt="Cruva" className="h-[60px] w-auto object-contain" loading="lazy" />
+                                <img src="/footer_logos/Refunnel Logo.webp" alt="Refunnel" className="h-[60px] w-auto object-contain" loading="lazy" />
+                                <img src="/footer_logos/TikTok Shop Logo.webp" alt="TikTok Shop" className="h-[65px] w-auto object-contain" loading="lazy" />
                             </div>
                         </div>
                     </ScrollReveal>
@@ -65,7 +65,7 @@ const Footer = () => {
                                 <a href="/terms-of-service" className="hover:text-[var(--neutral-04)] transition-colors no-underline">Terms of Service</a>
                             </div>
                             <p className="text-[var(--neutral-04)]/60 text-[14px] m-0">
-                                © 2025 Social TK.
+                                © 2025 SocialTK.
                             </p>
                         </div>
                     </ScrollReveal>

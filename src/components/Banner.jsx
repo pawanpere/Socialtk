@@ -25,10 +25,10 @@ const Banner = ({
 
                         {/* Floating Labels - with animations */}
                         <div className="relative w-full">
-                            <p className="hidden min-[768px]:block absolute z-10 bg-[var(--color-02)] text-white rounded-full px-4 py-1 text-[20px] max-[767px]:text-[16px] font-bold top-[-14%] left-1/2 animate-float-y" style={{ transform: 'rotate(4deg) translateX(-50%)' }}>Tiktok Shop</p>
-                            <p className="hidden min-[768px]:block absolute z-10 bg-[var(--color-04)] text-white rounded-full px-4 py-1 text-[20px] max-[767px]:text-[16px] font-bold bottom-[49%] left-[-8%] animate-float-y-slow" style={{ transform: 'rotate(8deg)' }}>Business Growth</p>
-                            <p className="hidden min-[768px]:block absolute z-10 bg-[var(--color-03)] text-white rounded-full px-4 py-1 text-[20px] max-[767px]:text-[16px] font-bold bottom-[51%] right-[-8%] animate-float-y-reverse" style={{ transform: 'rotate(-9deg)' }}>Brand Strategy</p>
-                            <p className="hidden min-[768px]:block absolute z-10 bg-[var(--color-01)] text-[var(--neutral-04)] rounded-full px-4 py-1 text-[20px] max-[767px]:text-[16px] font-bold bottom-[5%] left-[-15%] animate-float-y" style={{ transform: 'rotate(5deg)' }}>Performance Metrics</p>
+                            <p className="hidden xl:block absolute z-10 bg-[var(--color-02)] text-white rounded-full px-4 py-1 text-[20px] font-bold top-[-15%] right-[-10%] animate-float-y" style={{ transform: 'rotate(4deg)' }}>Tiktok Shop</p>
+                            <p className="hidden xl:block absolute z-10 bg-[var(--color-04)] text-white rounded-full px-4 py-1 text-[20px] font-bold top-[15%] left-[-20%] animate-float-y-slow" style={{ transform: 'rotate(8deg)' }}>Business Growth</p>
+                            <p className="hidden xl:block absolute z-10 bg-[var(--color-03)] text-white rounded-full px-4 py-1 text-[20px] font-bold bottom-[20%] right-[-20%] animate-float-y-reverse" style={{ transform: 'rotate(-9deg)' }}>Brand Strategy</p>
+                            <p className="hidden xl:block absolute z-10 bg-[var(--color-01)] text-[var(--neutral-04)] rounded-full px-4 py-1 text-[20px] font-bold bottom-[-10%] left-[-5%] animate-float-y" style={{ transform: 'rotate(5deg)' }}>Performance Metrics</p>
 
                             <ScrollReveal>
                                 <h2 className="text-white text-[72px] max-[991px]:text-[56px] max-[767px]:text-[42px] max-[479px]:text-[32px] leading-[100%] tracking-[-1.5px] max-[479px]:tracking-[-1px] max-w-[965px] mx-auto relative font-medium uppercase">

@@ -9,7 +9,7 @@ const CTA = () => {
                     style={{ backgroundColor: 'var(--neutral-04)', backgroundImage: "url('/assets/6858db3d92470242cda7af31_Vector%20(2).svg')", backgroundPosition: '50% 100%', backgroundSize: '10%' }}>
                     <div className="flex flex-col items-center text-center gap-[175px] max-[767px]:gap-[80px] max-[479px]:gap-[60px] max-w-[965px] mx-auto py-[100px] max-[479px]:py-[60px] px-[40px] max-[767px]:px-[30px] max-[479px]:px-[20px] relative">
                         <ScrollReveal>
-                            <h2 className="text-white"><span className="text-[var(--neutral-02)]">Ready to Partner</span> with Revento & unlock the full potential?</h2>
+                            <h2 className="text-white"><span className="text-[var(--neutral-02)]">Ready to Partner</span> with SocialTK & unlock the full potential?</h2>
                         </ScrollReveal>
 
                         <ScrollReveal delay={0.15}>
@@ -23,10 +23,10 @@ const CTA = () => {
                         </ScrollReveal>
 
                         {/* Helix spiral - top-left, floating */}
-                        <img src="/assets/6858db3d92470242cda7af61_Helix.png" alt="" className="absolute top-[40%] max-[991px]:top-[42%] left-[45%] max-[991px]:left-[40%] max-[479px]:left-[28%] w-[6%] max-[479px]:w-[12%] animate-float-y-slow hidden sm:block" />
+                        <img src="/assets/6858db3d92470242cda7af61_Helix.webp" alt="" className="absolute top-[40%] max-[991px]:top-[42%] left-[45%] max-[991px]:left-[40%] max-[479px]:left-[28%] w-[6%] max-[479px]:w-[12%] animate-float-y-slow hidden sm:block" loading="lazy" />
 
                         {/* CTA sticker - spinning circle badge */}
-                        <img src="/assets/6858db3d92470242cda7af62_Group.png" alt="" className="absolute top-[52%] max-[991px]:top-[32%] max-[479px]:top-[50%] right-[32%] max-[991px]:right-[10%] max-[479px]:right-[-3%] w-[10%] max-[479px]:w-[20%] animate-spin-slow hidden sm:block z-20" />
+                        <img src="/assets/6858db3d92470242cda7af62_Group.webp" alt="" className="absolute top-[52%] max-[991px]:top-[32%] max-[479px]:top-[50%] right-[32%] max-[991px]:right-[10%] max-[479px]:right-[-3%] w-[10%] max-[479px]:w-[20%] animate-spin-slow hidden sm:block z-20" loading="lazy" />
 
                         {/* Performance Metrics label */}
                         <p className="hidden min-[992px]:block absolute bg-[var(--color-01)] text-[var(--neutral-04)] rounded-full px-4 py-1 text-[20px] max-[767px]:text-[16px] font-semibold top-[-8%] max-[991px]:top-[-9%] right-[20%] animate-float-y" style={{ transform: 'rotate(5deg)' }}>Performance Metrics</p>

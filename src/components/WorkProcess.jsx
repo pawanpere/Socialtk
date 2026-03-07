@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { ScrollReveal } from '../hooks/useScrollAnimation';
 
 const processSteps = [
-    { num: '1.', title: 'Month 1 - Foundation', desc: 'Optimize listings, import reviews, handpick 30 creators, launch your Discord community. Fully operational TikTok Shop by day 30. Your baby is our baby from day one.', bgColor: '#ff8f27' },
-    { num: '2.', title: 'Month 2 - Traction', desc: 'Scale to 100+ samples shipped. Identify winning content. Start conservative ad spend (~$1,500) behind the best-performing videos. The flywheel starts racking in sales.', bgColor: '#e9fa49' },
-    { num: '3.', title: 'Month 3 - Graduation', desc: 'Hit consistent mature orders, 100-200 new videos per week. Your favourite agencies won\'t tell you about the probation period, but we specialize in graduating you past TikTok\'s caps and restrictions.', bgColor: '#ff4f3f' },
+    { num: '1.', title: 'Month 1 - Foundation', desc: 'Optimize listings, import reviews, handpick 50 creators, launch your Discord community. Fully operational TikTok Shop by day 30. Your baby is our baby from day one.', bgColor: '#ff8f27' },
+    { num: '2.', title: 'Month 2 - Traction', desc: 'Scale to 100+ samples shipped. Identify winning content. Start conservative ad spend behind the best-performing videos. The flywheel starts racking in sales.', bgColor: '#e9fa49' },
+    { num: '3.', title: 'Month 3 - Graduation', desc: 'Hit consistent mature orders, 100-200 new videos per week. Your favourite agencies won\'t tell you about the probation period, but we specialize in graduating you past TikTok\'s handcuffs and restrictions.', bgColor: '#ff4f3f' },
     { num: '4.', title: 'Month 4+ - Scale', desc: "The flywheel is racking in sales. Creator content feeds ads, ads fuel discovery, TikTok sales lift Amazon and Shopify. Not a one-off post, creators posting multiple times a day, on repeat. Target blended ROI: 5X", bgColor: '#1cb785' },
 ];
 
@@ -70,7 +70,7 @@ const WorkProcess = () => {
                     <ScrollReveal>
                         <div className="flex flex-col gap-4">
                             <h4 className="text-[var(--color-03)] uppercase">Our 90-Day Playbook</h4>
-                            <h2>From Cold Start to Category Leader in 90 Days.</h2>
+                            <h2>From Cold Start to Real Traction in 90 Days.</h2>
                         </div>
                     </ScrollReveal>
 
