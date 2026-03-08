@@ -24,7 +24,7 @@ const Footer = () => {
             <div className="container-main">
                 <div className="flex flex-col max-[767px]:flex-col min-[768px]:flex-row justify-between items-start gap-[100px] max-[767px]:gap-[40px]">
                     <ScrollReveal className="flex flex-col gap-[32px] items-start w-full min-[768px]:max-w-[700px]">
-                        <a href="/" className="block"><img src="/socialtk_logo-transparent.webp" alt="SocialTK Logo" className="w-full max-w-[190px]" loading="lazy" /></a>
+                        <a href="/" className="block"><img src="/logo_dark_nobg.png" alt="SocialTK Logo" className="w-full max-w-[190px]" loading="lazy" /></a>
                         <p className="text-[var(--neutral-04)]/80 leading-[170%] text-[22px] max-[767px]:text-[18px]">Two founders. Your entire TikTok Shop. No middlemen.</p>
 
                         <div className="flex flex-col mt-4">

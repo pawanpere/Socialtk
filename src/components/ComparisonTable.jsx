@@ -31,7 +31,7 @@ const ComparisonTable = () => {
                                 <div className="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] bg-[var(--neutral-04)] text-white px-[40px] max-[767px]:px-[10px] py-[32px] max-[767px]:py-[16px] rounded-[24px] max-[767px]:rounded-[16px] items-center gap-2">
                                     <div className="flex items-center gap-4">
                                         <div className="w-[180px] max-[767px]:w-[100px] h-auto">
-                                            <img src="/Images for social TK/socialtk_logo_new.webp" alt="SocialTK Logo" className="w-full h-auto object-contain" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} loading="lazy" />
+                                            <img src="/logo_light_nobg.png" alt="SocialTK Logo" className="w-full h-auto object-contain" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} loading="lazy" />
                                             <span className="hidden text-[28px] max-[767px]:text-[16px] font-bold tracking-tight">SocialTK</span>
                                         </div>
                                     </div>
