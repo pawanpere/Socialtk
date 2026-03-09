@@ -12,6 +12,7 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ComparisonTable from './components/ComparisonTable';
+import ROICalculator from './components/ROICalculator';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Testimonials />
       <Banner />
       <ComparisonTable />
+      <ROICalculator />
       <FAQ />
       <Banner
         headline={
