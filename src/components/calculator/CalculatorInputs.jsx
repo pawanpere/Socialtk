@@ -188,7 +188,7 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
 
                     {!inputs.isTieredRevShare ? (
                         <InputRow
-                            label="Revenue Share (%)"
+                            label="Fixed Rev Share (%)"
                             value={inputs.revSharePct}
                             onChange={(e) => handleChange('revSharePct', e.target.value)}
                             min={0} max={15} step={0.5} suffix="%"
@@ -231,22 +231,16 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {[0, 1, 2, 3, 4, 5, 6, 11].map((mIdx) => (
+                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((mIdx) => (
                                         <tr key={mIdx} className="border-b border-gray-800/30">
-                                            <td className="px-3 py-2 font-medium text-gray-300">M{mIdx + 1}{mIdx === 6 ? ' - M11' : ''}</td>
+                                            <td className="px-3 py-2 font-medium text-gray-300">M{mIdx + 1}</td>
                                             <td className="px-3 py-1">
                                                 <input
                                                     type="number"
                                                     value={inputs.sampleScheduleAgency[mIdx]}
                                                     onChange={(e) => {
                                                         const val = e.target.value;
-                                                        if (mIdx === 6) {
-                                                            const arr = [...inputs.sampleScheduleAgency];
-                                                            for (let i = 6; i < 12; i++) arr[i] = parseFloat(val) || 0;
-                                                            setInputs(prev => ({ ...prev, sampleScheduleAgency: arr }));
-                                                        } else {
-                                                            handleArrayChange('sampleScheduleAgency', mIdx, val);
-                                                        }
+                                                        handleArrayChange('sampleScheduleAgency', mIdx, val);
                                                     }}
                                                     className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-center text-white focus:border-[var(--neutral-03)] outline-none"
                                                 />
@@ -256,7 +250,6 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                                 </tbody>
                             </table>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">* M7 applies to M7-M11. M12 shown separately for reference.</p>
                     </div>
 
                     <div className="py-4 border-t border-white/10 mt-4">
@@ -270,22 +263,16 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {[0, 1, 2, 3, 4, 5, 6, 11].map((mIdx) => (
+                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((mIdx) => (
                                         <tr key={mIdx} className="border-b border-gray-800/30">
-                                            <td className="px-3 py-2 font-medium text-gray-300">M{mIdx + 1}{mIdx === 6 ? ' - M11' : ''}</td>
+                                            <td className="px-3 py-2 font-medium text-gray-300">M{mIdx + 1}</td>
                                             <td className="px-3 py-1">
                                                 <input
                                                     type="number"
                                                     value={inputs.incentiveFundSchedule[mIdx]}
                                                     onChange={(e) => {
                                                         const val = e.target.value;
-                                                        if (mIdx === 6) {
-                                                            const arr = [...inputs.incentiveFundSchedule];
-                                                            for (let i = 6; i < 12; i++) arr[i] = parseFloat(val) || 0;
-                                                            setInputs(prev => ({ ...prev, incentiveFundSchedule: arr }));
-                                                        } else {
-                                                            handleArrayChange('incentiveFundSchedule', mIdx, val);
-                                                        }
+                                                        handleArrayChange('incentiveFundSchedule', mIdx, val);
                                                     }}
                                                     className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-center text-white focus:border-[var(--neutral-03)] outline-none"
                                                 />
@@ -295,7 +282,6 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                                 </tbody>
                             </table>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">* M7 applies to M7-M11. M12 shown separately for reference.</p>
                     </div>
                 </AccordionItem>
 
@@ -306,12 +292,6 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                     onToggle={() => toggleSection(5)}
                     isStandard={inputs.roas === defaultInputs.roas}
                 >
-                    <InputRow
-                        label="ROAS"
-                        value={inputs.roas}
-                        onChange={(e) => handleChange('roas', e.target.value)}
-                        min={0.5} max={8.0} step={0.1} suffix="x"
-                    />
                     <div className="py-4 border-t border-white/10 mt-4">
                         <h4 className="text-gray-300 font-medium mb-4">Ad Spend Ramp-Up Schedule</h4>
                         <div className="overflow-x-auto">
@@ -319,11 +299,11 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                                 <thead className="text-xs text-gray-400 uppercase bg-white/5">
                                     <tr>
                                         <th className="px-3 py-2">Month</th>
-                                        <th className="px-3 py-2 text-right text-white">Ad Spend ($)</th>
+                                        <th className="px-3 py-2 text-right text-[var(--neutral-03)]">Ad Spend ($)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {[0, 1, 2, 3, 4, 5, 11].map((mIdx) => (
+                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((mIdx) => (
                                         <tr key={mIdx} className="border-b border-gray-800/30">
                                             <td className="px-3 py-2 font-medium text-gray-300">M{mIdx + 1}</td>
                                             <td className="px-3 py-1">
@@ -331,8 +311,39 @@ const CalculatorInputs = ({ inputs, setInputs, defaultInputs, onCalculate }) => 
                                                     type="number"
                                                     value={inputs.adSpendSchedule[mIdx]}
                                                     onChange={(e) => {
-                                                        // Simple auto-fill for M7-M12 if M6 is changed can be complex, manual is fine here
                                                         handleArrayChange('adSpendSchedule', mIdx, e.target.value);
+                                                    }}
+                                                    className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-right text-white focus:border-[var(--neutral-03)] outline-none"
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div className="py-4 border-t border-white/10 mt-4">
+                        <h4 className="text-gray-300 font-medium mb-4">Target ROAS Ramp-Up Schedule</h4>
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-sm text-left">
+                                <thead className="text-xs text-gray-400 uppercase bg-white/5">
+                                    <tr>
+                                        <th className="px-3 py-2">Month</th>
+                                        <th className="px-3 py-2 text-right text-[var(--neutral-03)]">ROAS (x)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((mIdx) => (
+                                        <tr key={mIdx} className="border-b border-gray-800/30">
+                                            <td className="px-3 py-2 font-medium text-gray-300">M{mIdx + 1}</td>
+                                            <td className="px-3 py-1">
+                                                <input
+                                                    type="number"
+                                                    step="0.1"
+                                                    value={inputs.roasSchedule?.[mIdx] ?? inputs.roas}
+                                                    onChange={(e) => {
+                                                        handleArrayChange('roasSchedule', mIdx, e.target.value);
                                                     }}
                                                     className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-right text-white focus:border-[var(--neutral-03)] outline-none"
                                                 />

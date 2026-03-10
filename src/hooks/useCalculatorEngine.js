@@ -6,7 +6,7 @@ export const useCalculatorEngine = () => {
         const VIDEOS_PER_CREATOR_AGENCY = 1.5;
         const AVG_VIEWS_BASE = 8000;
         const VIEW_GROWTH_AGENCY = 0.10;
-        const VIEW_TO_PURCHASE = 0.008; // 0.8%
+        const VIEW_TO_PURCHASE = 0.0008; // 0.08%
 
         // Fixed Sample Conversion Rate
         const VIDEO_CONVERSION_RATE = 0.6; // 60% of samples -> 1 video
@@ -39,6 +39,7 @@ export const useCalculatorEngine = () => {
 
             // 5. Ad Spend
             adSpendSchedule = [0, 3000, 3500, 5000, 8000, 10000, 12000, 14400, 17280, 20736, 24883, 29860], // Based on input or default
+            roasSchedule = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
             roas = 2.0
         } = inputs;
 
@@ -76,7 +77,7 @@ export const useCalculatorEngine = () => {
                 const organicGmv = estimatedReach * VIEW_TO_PURCHASE * aov;
 
                 const adSpendLimit = adSpendSchedule[m];
-                const effectiveRoas = roas;
+                const effectiveRoas = (roasSchedule && roasSchedule.length > m) ? roasSchedule[m] : roas;
                 const paidGmv = adSpendLimit * effectiveRoas;
 
                 const totalGmv = organicGmv + paidGmv;

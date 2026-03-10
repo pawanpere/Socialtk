@@ -32,6 +32,7 @@ const ROICalculator = () => {
         sampleScheduleAgency: [40, 60, 80, 100, 120, 140, 160, 160, 160, 160, 160, 160],
         // 5. Ad Spend
         adSpendSchedule: [0, 3000, 3500, 5000, 8000, 10000, 12000, 14400, 17280, 20736, 24883, 29860],
+        roasSchedule: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
         roas: 2.0,
         adSpendGrowthPct: 20 // Used by inputs form to build array
     };
@@ -53,10 +54,10 @@ const ROICalculator = () => {
             <div className="container-main">
                 <div className="text-center mb-16 flex flex-col gap-4 max-w-[800px] mx-auto">
                     <h2 className="text-[64px] max-[991px]:text-[48px] max-[767px]:text-[40px] leading-[1.1] tracking-[-0.02em] font-normal uppercase m-0" style={{ fontFamily: "'Anton', sans-serif" }}>
-                        Agency <span className="text-[var(--neutral-03)]">ROI</span> Calculator
+                        Budget <span className="text-[var(--neutral-03)]">Forecast</span> Calculator
                     </h2>
                     <p className="text-[18px] text-[var(--neutral-04)]/80 m-0">
-                        Model your 12-month TikTok Shop launch. See the exact financial impact of hiring SocialTK versus building an in-house team.
+                        Model your 12-month Tiktok Shop Launch. See when you break even, your creator flywheel, and your sampling ROI.
                     </p>
                 </div>
 
