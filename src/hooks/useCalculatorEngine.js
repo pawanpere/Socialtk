@@ -80,15 +80,21 @@ export const useCalculatorEngine = () => {
                 const effectiveRoas = (roasSchedule && roasSchedule.length > m) ? roasSchedule[m] : roas;
                 const paidGmv = adSpendLimit * effectiveRoas;
 
-                const totalGmv = organicGmv + paidGmv;
-                const orders = totalGmv / aov;
-                const revenue = totalGmv * (1 - RETURN_RATE);
+                const totalGmvRaw = organicGmv + paidGmv;
+                const orders_raw = totalGmvRaw / aov;
+                
+                // Fix: Round order count to the nearest whole number first, 
+                // then derive all other figures from that rounded value.
+                const orders = Math.round(orders_raw);
+                const totalGmv = orders * aov;
+                const platformFeeAmount = totalGmv * (tiktokFeePct / 100);
+                // Revenue = GMV - TikTok Platform Fee
+                const revenue = totalGmv - platformFeeAmount;
 
-                // --- VARIABLE COSTS ---
+                // --- VARIABLE COSTS (derived from Revenue where applicable) ---
                 const cogsAmount = orders * cogs;
                 const shippingAmount = orders * shippingCost;
-                const creatorCommissionAmount = totalGmv * (creatorCommissionPct / 100);
-                const platformFeeAmount = totalGmv * (tiktokFeePct / 100);
+                const creatorCommissionAmount = revenue * (creatorCommissionPct / 100);
 
                 // --- FIXED COSTS ---
                 const sampleCostAmount = samplesSentThisMonth * costPerSample;
@@ -99,7 +105,7 @@ export const useCalculatorEngine = () => {
 
                 if (isTieredRevShare) {
                     let rs = 0;
-                    let remaining = totalGmv;
+                    let remaining = revenue;
 
                     // Tier 1
                     let taxable1 = Math.min(remaining, tier1Ceiling);
@@ -123,7 +129,7 @@ export const useCalculatorEngine = () => {
                     revShareAmt = totalComp - retainerAmt;
                 } else {
                     // Flat rate
-                    revShareAmt = totalGmv * (revSharePct / 100);
+                    revShareAmt = revenue * (revSharePct / 100);
                 }
 
                 const totalAgencyFees = retainerAmt + revShareAmt;
@@ -153,7 +159,7 @@ export const useCalculatorEngine = () => {
                     organicGmv,
                     paidGmv,
                     totalGmv,
-                    orders: Math.round(orders),
+                    orders,
                     revenue,
                     cogs: cogsAmount,
                     shipping: shippingAmount,
