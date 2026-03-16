@@ -40,14 +40,23 @@ const ROICalculator = () => {
     };
 
     return (
-        <section className="bg-[var(--neutral-01)] text-[var(--neutral-04)] w-full pt-0 px-[30px] font-sans padding-bottom" id="roi-calculator">
+        <section className="bg-[var(--neutral-01)] text-[var(--neutral-04)] w-full pt-[40px] pb-[120px] px-[30px] font-sans" id="roi-calculator">
             <div className="container-main">
-                <div className="text-center mb-16 flex flex-col gap-4 max-w-[800px] mx-auto">
-                    <h2 className="text-[64px] max-[991px]:text-[48px] max-[767px]:text-[40px] leading-[1.1] tracking-[-0.02em] font-normal uppercase m-0" style={{ fontFamily: "'Anton', sans-serif" }}>
-                        Budget <span className="text-[var(--neutral-03)]">Forecast</span> Calculator
+                <div className="text-center mb-16 flex flex-col gap-4 max-w-[900px] mx-auto">
+                    <h2
+                        className="leading-[1.1] tracking-[-0.02em] font-normal uppercase m-0 flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+                        style={{ fontFamily: "'Anton', sans-serif", fontSize: 'clamp(40px, 6vw, 64px)' }}
+                    >
+                        <img
+                            src="/favicon.png"
+                            alt="STK"
+                            className="inline-block object-contain"
+                            style={{ height: 'clamp(40px, 6vw, 64px)', width: 'auto', verticalAlign: 'middle' }}
+                        />
+                        Budget{' '}<span className="text-[var(--neutral-03)]">Forecast</span>{' '}Calculator
                     </h2>
                     <p className="text-[18px] text-[var(--neutral-04)]/80 m-0">
-                        Model your 12-month Tiktok Shop Launch. See when you break even, your creator flywheel, and your sampling ROI.
+                        Model your 12-month TikTok Shop Launch. See when you break even, your creator flywheel, and your sampling ROI.
                     </p>
                 </div>
 
