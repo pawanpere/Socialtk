@@ -262,8 +262,8 @@ const CalculatorResults = ({ results, inputs }) => {
 
                             {/* Marketing breakdown */}
                             {[
-                                { label: 'Creator Commission', key: 'creatorCommission' },
-                                { label: 'Platform Fee (6%)', key: 'platformFee' },
+                                { label: `Creator Commission (${activeData.monthlyData[0]?.creatorCommissionPct || 20}%)`, key: 'creatorCommission' },
+                                { label: `Platform Fee (${activeData.monthlyData[0]?.platformFeePct || 6}%)`, key: 'platformFee' },
                                 { label: 'Ad Spend', key: 'adSpend' },
                                 { label: 'Creator Incentives', key: 'incentives' },
                             ].map((row, idx) => (

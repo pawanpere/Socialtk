@@ -15,8 +15,11 @@ export const useCalculatorEngine = () => {
             shippingSchedule = [9.5, 9.5, 9.5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             unitsSoldSchedule = [100, 300, 450, 750, 1500, 2400, 3200, 4000, 4500, 5000, 5500, 6000],
             samplesSchedule = [200, 200, 300, 400, 400, 500, 750, 750, 750, 750, 750, 750],
-            creatorCommissionSchedule = [800, 2400, 1800, 12000, 20000, 24000, 40000, 60000, 67500, 75000, 82500, 90000],
-            platformFeeSchedule = [240, 720, 540, 3600, 6000, 7200, 12000, 18000, 14850, 16500, 18150, 19800],
+
+            // Percentages (applied to GMV)
+            creatorCommissionPct = 20,  // single percentage applied to GMV
+            platformFeePct = 6,         // fixed at 6%, non-editable
+
             adSpendSchedule = [2000, 4500, 9000, 15000, 25000, 30000, 35000, 50000, 55000, 60000, 65000, 70000],
             incentiveFundSchedule = [450, 600, 1200, 2000, 3000, 4000, 5000, 7500, 8000, 8500, 9000, 9500],
 
@@ -48,8 +51,6 @@ export const useCalculatorEngine = () => {
                 const shipping = shippingSchedule[m] || 0;
                 const unitsSold = unitsSoldSchedule[m] || 0;
                 const samples = samplesSchedule[m] || 0;
-                const creatorCommission = creatorCommissionSchedule[m] || 0;
-                const platformFee = platformFeeSchedule[m] || 0;
                 const adSpend = adSpendSchedule[m] || 0;
                 const incentives = incentiveFundSchedule[m] || 0;
 
@@ -67,9 +68,14 @@ export const useCalculatorEngine = () => {
                 // Total GMV = AOV × Units Sold
                 const totalGmv = aov * unitsSold;
 
-                // COGS Cost = (COGS × Units) + (Shipping × Units) + (COGS × Samples) + (Shipping × Samples)
-                //           = (COGS + Shipping) × (Units + Samples)
+                // COGS Cost = (COGS + Shipping) × (Units + Samples)
                 const cogsCost = (cogs * unitsSold) + (shipping * unitsSold) + (cogs * samples) + (shipping * samples);
+
+                // Creator Commission = creatorCommissionPct% of GMV
+                const creatorCommission = totalGmv * (creatorCommissionPct / 100);
+
+                // Platform Fee = platformFeePct% of GMV (fixed at 6%)
+                const platformFee = totalGmv * (platformFeePct / 100);
 
                 // Marketing Cost = Creator Commission + Platform Fee + Ad Spend + Creator Incentives
                 const marketingCost = creatorCommission + platformFee + adSpend + incentives;
@@ -88,7 +94,7 @@ export const useCalculatorEngine = () => {
                 // Update Sample Tracking
                 totalSamplesSent += samplesSentThisMonth;
                 totalVideosGenerated += videosPosted;
-                totalSampleCost += (cogs + shipping) * samples; // sample cost based on COGS+shipping
+                totalSampleCost += (cogs + shipping) * samples;
                 totalOrganicGmvEst += organicGmv;
 
                 months.push({
@@ -105,11 +111,13 @@ export const useCalculatorEngine = () => {
                     videosPosted: Math.round(videosPosted),
                     estimatedReach: Math.round(estimatedReach),
                     organicGmv,
-                    // P&L rows matching Excel
+                    // P&L rows
                     totalGmv,
                     cogsCost,
                     creatorCommission,
+                    creatorCommissionPct,
                     platformFee,
+                    platformFeePct,
                     adSpend,
                     incentives,
                     marketingCost,
@@ -152,7 +160,6 @@ export const useCalculatorEngine = () => {
 
         const netProfit12m = agencyData.summary.totalNetProfit;
 
-        // Total GMV for ROI purpose
         const totalGmv12m = agencyData.monthlyData.reduce((sum, m) => sum + m.totalGmv, 0);
         const totalCost12m = agencyData.monthlyData.reduce((sum, m) => sum + m.totalCost, 0);
         let roiMultipleFormatted = "N/A";

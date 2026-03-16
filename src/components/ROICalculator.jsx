@@ -15,8 +15,8 @@ const ROICalculator = () => {
         shippingSchedule: [9.5, 9.5, 9.5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
         unitsSoldSchedule: [100, 300, 450, 750, 1500, 2400, 3200, 4000, 4500, 5000, 5500, 6000],
         samplesSchedule: [200, 200, 300, 400, 400, 500, 750, 750, 750, 750, 750, 750],
-        creatorCommissionSchedule: [800, 2400, 1800, 12000, 20000, 24000, 40000, 60000, 67500, 75000, 82500, 90000],
-        platformFeeSchedule: [240, 720, 540, 3600, 6000, 7200, 12000, 18000, 14850, 16500, 18150, 19800],
+        creatorCommissionPct: 20,  // % of GMV
+        platformFeePct: 6,        // % of GMV — fixed, non-editable
         adSpendSchedule: [2000, 4500, 9000, 15000, 25000, 30000, 35000, 50000, 55000, 60000, 65000, 70000],
         incentiveFundSchedule: [450, 600, 1200, 2000, 3000, 4000, 5000, 7500, 8000, 8500, 9000, 9500],
         // Month labels
