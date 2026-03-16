@@ -40,7 +40,7 @@ const ROICalculator = () => {
     };
 
     return (
-        <section className="bg-[var(--neutral-01)] text-[var(--neutral-04)] w-full py-[120px] px-[30px] font-sans padding-bottom" id="roi-calculator">
+        <section className="bg-[var(--neutral-01)] text-[var(--neutral-04)] w-full pt-0 px-[30px] font-sans padding-bottom" id="roi-calculator">
             <div className="container-main">
                 <div className="text-center mb-16 flex flex-col gap-4 max-w-[800px] mx-auto">
                     <h2 className="text-[64px] max-[991px]:text-[48px] max-[767px]:text-[40px] leading-[1.1] tracking-[-0.02em] font-normal uppercase m-0" style={{ fontFamily: "'Anton', sans-serif" }}>
