@@ -8,6 +8,7 @@ import { jsPDF } from 'jspdf';
 import { Download } from 'lucide-react';
 
 const formatCurrency = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+const formatCurrencyDecimal = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(val);
 const formatNumber = (val) => new Intl.NumberFormat('en-US').format(val);
 
 const HeroCard = ({ title, value, subtitle, highlight = false }) => (
@@ -29,9 +30,7 @@ const CustomTooltip = ({ active, payload, label }) => {
                         <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }} />
                         <span className="text-gray-400">{entry.name}:</span>
                         <span className="text-white font-medium">
-                            {entry.name.includes('Profit') || entry.name.includes('Spend') || entry.name.includes('CPO')
-                                ? formatCurrency(entry.value)
-                                : formatNumber(entry.value)}
+                            {formatCurrency(entry.value)}
                         </span>
                     </div>
                 ))}
@@ -47,29 +46,22 @@ const CalculatorResults = ({ results, inputs }) => {
     const [isExporting, setIsExporting] = useState(false);
 
     const { heroMetrics, agency } = results;
+    const activeData = agency;
 
     // Prepare Profitability Chart Data
-    const profitabilityData = agency.monthlyData.map((aData) => {
-        return {
-            name: aData.label,
-            AgencyProfit: aData.cumulativeProfit,
-            Month: aData.month
-        };
-    });
+    const profitabilityData = agency.monthlyData.map((aData) => ({
+        name: aData.label,
+        CumulativeProfit: aData.cumulativeProfit,
+        NetProfit: aData.net,
+        Month: aData.month
+    }));
 
     // Prepare Flywheel Data
-    const activeData = agency;
     const flywheelData = activeData.monthlyData.map(d => ({
         name: d.label,
         ActiveCreators: d.activeCreators,
         VideosPosted: d.videosPosted,
         EstimatedReach: d.estimatedReach
-    }));
-
-    // Prepare CPO Data
-    const cpoData = agency.monthlyData.map((aData) => ({
-        name: aData.label,
-        AgencyCPO: aData.costPerOrder
     }));
 
     const exportPDF = async () => {
@@ -95,26 +87,36 @@ const CalculatorResults = ({ results, inputs }) => {
         }
     };
 
+    // Compute totals across all months for summary
+    const totalGmv = activeData.monthlyData.reduce((s, m) => s + m.totalGmv, 0);
+    const totalNet = activeData.monthlyData.reduce((s, m) => s + m.net, 0);
+    const totalAdSpend = activeData.monthlyData.reduce((s, m) => s + m.adSpend, 0);
+
     return (
         <div className="space-y-12" id="results-dashboard" ref={containerRef}>
 
             {/* 1. Hero Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <HeroCard
                     title="Break-Even Month"
                     value={heroMetrics.breakEvenMonth}
-                    subtitle="With SocialTK Management"
+                    subtitle="Month where cumulative profit turns positive"
                     highlight={true}
                 />
                 <HeroCard
                     title="12-Month Net Profit"
                     value={formatCurrency(heroMetrics.netProfit12m)}
-                    subtitle="After all costs including agency fees"
+                    subtitle="After all costs"
                 />
                 <HeroCard
-                    title="Agency ROI Multiple"
+                    title="Total GMV"
+                    value={formatCurrency(totalGmv)}
+                    subtitle="Gross Merchandise Value over 12 months"
+                />
+                <HeroCard
+                    title="GMV-to-Cost Ratio"
                     value={heroMetrics.roiMultiple}
-                    subtitle="For every $1 in agency fees, you earn this back"
+                    subtitle="Total GMV ÷ Total Costs"
                 />
             </div>
 
@@ -125,16 +127,15 @@ const CalculatorResults = ({ results, inputs }) => {
 
                 <div className="h-[400px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={profitabilityData} margin={{ top: 10, right: 10, left: 20, bottom: 0 }}>
+                        <ComposedChart data={profitabilityData} margin={{ top: 10, right: 10, left: 20, bottom: 0 }}>
                             <defs>
-                                <linearGradient id="colorAgency" x1="0" y1="0" x2="0" y2="1">
+                                <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="var(--neutral-03)" stopOpacity={0.8} />
                                     <stop offset="95%" stopColor="var(--neutral-03)" stopOpacity={0} />
                                 </linearGradient>
-                                {/* Red tint for below zero is handled by reference line / shading in recharts via advanced tricks, or visually just by the line crossing 0 */}
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
-                            <XAxis dataKey="name" stroke="#888" tick={{ fill: '#888', fontSize: 12 }} />
+                            <XAxis dataKey="name" stroke="#888" tick={{ fill: '#888', fontSize: 11 }} />
                             <YAxis stroke="#888" tickFormatter={(value) => `$${value / 1000}k`} tick={{ fill: '#888', fontSize: 12 }} />
                             <RechartsTooltip content={<CustomTooltip />} />
                             <Legend verticalAlign="top" height={36} iconType="circle" />
@@ -142,25 +143,26 @@ const CalculatorResults = ({ results, inputs }) => {
 
                             {heroMetrics.crossoverMonth && (
                                 <ReferenceLine
-                                    x={`Month ${heroMetrics.crossoverMonth}`}
+                                    x={activeData.monthlyData[heroMetrics.crossoverMonth - 1]?.label}
                                     stroke="var(--neutral-03)"
                                     strokeDasharray="5 5"
-                                    label={{ position: 'top', value: `Break-even: Month ${heroMetrics.crossoverMonth}`, fill: 'var(--neutral-03)', fontSize: 12 }}
+                                    label={{ position: 'top', value: `Break-even`, fill: 'var(--neutral-03)', fontSize: 12 }}
                                 />
                             )}
 
-                            <Area type="monotone" dataKey="AgencyProfit" name="SocialTK Cumulative Profit" stroke="var(--neutral-03)" strokeWidth={3} fillOpacity={1} fill="url(#colorAgency)" />
-                        </AreaChart>
+                            <Bar dataKey="NetProfit" name="Monthly Net" fill="var(--color-04)" opacity={0.6} />
+                            <Area type="monotone" dataKey="CumulativeProfit" name="Cumulative Profit" stroke="var(--neutral-03)" strokeWidth={3} fillOpacity={1} fill="url(#colorProfit)" />
+                        </ComposedChart>
                     </ResponsiveContainer>
                 </div>
             </div>
 
-            {/* 3. Monthly P&L Table */}
+            {/* 3. Monthly P&L Table — Matching Excel Layout */}
             <div className="bg-white/5 border border-white/10 rounded-[32px] p-6 md:p-8">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-6">
                     <div>
                         <h3 className="text-2xl font-[Anton] uppercase text-white mb-2 m-0">Monthly P&L</h3>
-                        <p className="text-gray-400 text-sm m-0">Detailed 12-month breakdown</p>
+                        <p className="text-gray-400 text-sm m-0">Detailed 12-month breakdown (matches Spacemilk PNL layout)</p>
                     </div>
                 </div>
 
@@ -175,39 +177,155 @@ const CalculatorResults = ({ results, inputs }) => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-800/50">
-                            {/* Rows definition */}
+                            {/* Info rows */}
                             {[
-                                { label: 'GMV', key: 'totalGmv' },
-                                { label: 'Orders', key: 'orders', format: formatNumber },
-                                { label: 'Revenue', key: 'revenue' },
-                                { label: 'COGS', key: 'cogs' },
-                                { label: 'Shipping', key: 'shipping' },
-                                { label: 'Creator Comm.', key: 'creatorCommission' },
-                                { label: 'TikTok Fee', key: 'platformFee' },
-                                { label: 'Ad Spend', key: 'adSpend' },
-                                { label: 'Sample Cost', key: 'sampleCost' },
-                                { label: 'Incentives', key: 'incentiveFund' },
-                                { label: 'Agency Retainer', key: 'agencyRetainer' },
-                                { label: 'Agency Rev Share', key: 'agencyRevShare' },
-                                { label: 'Total Costs', key: 'totalCosts', isBold: true },
-                                { label: 'Net Profit', key: 'netProfit', isBold: true, colorize: true },
-                                { label: 'Cumul. Profit', key: 'cumulativeProfit', isBold: true, colorize: true }
+                                { label: 'UGC Volume', key: 'ugcVolume', isText: true, isInfo: true },
+                                { label: 'CPA', key: 'cpa', format: (v) => `$${v}`, isInfo: true },
+                                { label: 'ROAS', key: 'roas', format: (v) => `${v}x`, isInfo: true },
                             ].map((row, idx) => (
-                                <tr key={idx} className="hover:bg-white/5 transition-colors border-t border-white/5">
-                                    <td className={`px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-medium ${row.isBold ? 'text-white' : 'text-gray-400'}`}>
+                                <tr key={`info-${idx}`} className="hover:bg-white/5 transition-colors border-t border-white/5">
+                                    <td className="px-4 py-2 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-medium text-gray-500 text-xs">
                                         {row.label}
                                     </td>
-                                    {activeData.monthlyData.map(m => {
-                                        const val = m[row.key];
-                                        const isNeg = val < 0;
-                                        return (
-                                            <td key={m.month} className={`px-4 py-3 ${row.isBold ? 'font-bold' : ''} ${row.colorize ? (isNeg ? 'text-[var(--color-03)]' : 'text-white') : 'text-gray-300'}`}>
-                                                {row.format ? row.format(val) : formatCurrency(val)}
-                                            </td>
-                                        );
-                                    })}
+                                    {activeData.monthlyData.map(m => (
+                                        <td key={m.month} className="px-4 py-2 text-gray-500 text-xs">
+                                            {row.isText ? m[row.key] : (row.format ? row.format(m[row.key]) : m[row.key])}
+                                        </td>
+                                    ))}
                                 </tr>
                             ))}
+
+                            {/* Divider */}
+                            <tr><td colSpan={13} className="py-1 border-t-2 border-white/20"></td></tr>
+
+                            {/* Core inputs */}
+                            {[
+                                { label: 'AOV', key: 'aov', format: formatCurrencyDecimal },
+                                { label: 'Units Sold', key: 'unitsSold', format: formatNumber },
+                                { label: 'Samples Shipped', key: 'samples', format: formatNumber },
+                            ].map((row, idx) => (
+                                <tr key={`input-${idx}`} className="hover:bg-white/5 transition-colors border-t border-white/5">
+                                    <td className="px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-medium text-gray-400">
+                                        {row.label}
+                                    </td>
+                                    {activeData.monthlyData.map(m => (
+                                        <td key={m.month} className="px-4 py-3 text-gray-300">
+                                            {row.format(m[row.key])}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+
+                            {/* Total GMV (highlighted) */}
+                            <tr className="hover:bg-white/5 transition-colors border-t-2 border-[var(--neutral-03)]/30 bg-[var(--neutral-03)]/5">
+                                <td className="px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-bold text-white">
+                                    Total GMV
+                                </td>
+                                {activeData.monthlyData.map(m => (
+                                    <td key={m.month} className="px-4 py-3 text-white font-bold">
+                                        {formatCurrency(m.totalGmv)}
+                                    </td>
+                                ))}
+                            </tr>
+
+                            {/* Divider */}
+                            <tr><td colSpan={13} className="py-1"></td></tr>
+
+                            {/* COGS breakdown */}
+                            {[
+                                { label: 'COGS/unit', key: 'cogsPerUnit', format: formatCurrencyDecimal },
+                                { label: 'Shipping/unit', key: 'shippingPerUnit', format: formatCurrencyDecimal },
+                            ].map((row, idx) => (
+                                <tr key={`cogs-detail-${idx}`} className="hover:bg-white/5 transition-colors border-t border-white/5">
+                                    <td className="px-4 py-2 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-medium text-gray-500 text-xs pl-8">
+                                        ↳ {row.label}
+                                    </td>
+                                    {activeData.monthlyData.map(m => (
+                                        <td key={m.month} className="px-4 py-2 text-gray-500 text-xs">
+                                            {row.format(m[row.key])}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+
+                            {/* COGS Cost total */}
+                            <tr className="hover:bg-white/5 transition-colors border-t border-white/10">
+                                <td className="px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-bold text-[var(--color-03)]">
+                                    COGS Cost
+                                </td>
+                                {activeData.monthlyData.map(m => (
+                                    <td key={m.month} className="px-4 py-3 text-[var(--color-03)] font-semibold">
+                                        {formatCurrency(m.cogsCost)}
+                                    </td>
+                                ))}
+                            </tr>
+
+                            {/* Marketing breakdown */}
+                            {[
+                                { label: 'Creator Commission', key: 'creatorCommission' },
+                                { label: 'Platform Fee (6%)', key: 'platformFee' },
+                                { label: 'Ad Spend', key: 'adSpend' },
+                                { label: 'Creator Incentives', key: 'incentives' },
+                            ].map((row, idx) => (
+                                <tr key={`mkt-detail-${idx}`} className="hover:bg-white/5 transition-colors border-t border-white/5">
+                                    <td className="px-4 py-2 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-medium text-gray-500 text-xs pl-8">
+                                        ↳ {row.label}
+                                    </td>
+                                    {activeData.monthlyData.map(m => (
+                                        <td key={m.month} className="px-4 py-2 text-gray-500 text-xs">
+                                            {formatCurrency(m[row.key])}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+
+                            {/* Marketing Cost total */}
+                            <tr className="hover:bg-white/5 transition-colors border-t border-white/10">
+                                <td className="px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-bold text-[var(--color-03)]">
+                                    Marketing Cost
+                                </td>
+                                {activeData.monthlyData.map(m => (
+                                    <td key={m.month} className="px-4 py-3 text-[var(--color-03)] font-semibold">
+                                        {formatCurrency(m.marketingCost)}
+                                    </td>
+                                ))}
+                            </tr>
+
+                            {/* Total Cost */}
+                            <tr className="hover:bg-white/5 transition-colors border-t-2 border-white/20 bg-white/5">
+                                <td className="px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-bold text-white">
+                                    Total Cost
+                                </td>
+                                {activeData.monthlyData.map(m => (
+                                    <td key={m.month} className="px-4 py-3 text-white font-bold">
+                                        {formatCurrency(m.totalCost)}
+                                    </td>
+                                ))}
+                            </tr>
+
+                            {/* Net Profit */}
+                            <tr className="hover:bg-white/5 transition-colors border-t-2 border-[var(--neutral-03)]/30">
+                                <td className="px-4 py-4 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-bold text-white text-base">
+                                    Net
+                                </td>
+                                {activeData.monthlyData.map(m => (
+                                    <td key={m.month} className={`px-4 py-4 font-bold text-base ${m.net < 0 ? 'text-[var(--color-03)]' : 'text-green-400'}`}>
+                                        {formatCurrency(m.net)}
+                                    </td>
+                                ))}
+                            </tr>
+
+                            {/* Cumulative */}
+                            <tr className="hover:bg-white/5 transition-colors border-t border-white/10">
+                                <td className="px-4 py-3 text-left sticky left-0 bg-[var(--neutral-04)] z-10 font-bold text-gray-400">
+                                    Cumulative
+                                </td>
+                                {activeData.monthlyData.map(m => (
+                                    <td key={m.month} className={`px-4 py-3 font-bold ${m.cumulativeProfit < 0 ? 'text-[var(--color-03)]' : 'text-green-400'}`}>
+                                        {formatCurrency(m.cumulativeProfit)}
+                                    </td>
+                                ))}
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -222,10 +340,8 @@ const CalculatorResults = ({ results, inputs }) => {
                         <ResponsiveContainer width="100%" height="100%">
                             <ComposedChart data={flywheelData}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
-                                <XAxis dataKey="name" stroke="#888" tick={{ fontSize: 12 }} />
-                                {/* Left Axis for counts */}
+                                <XAxis dataKey="name" stroke="#888" tick={{ fontSize: 10 }} />
                                 <YAxis yAxisId="left" stroke="#888" tick={{ fontSize: 12 }} />
-                                {/* Right Axis for reach */}
                                 <YAxis yAxisId="right" orientation="right" stroke="#888" tickFormatter={(v) => `${v / 1000}k`} tick={{ fontSize: 12 }} />
                                 <RechartsTooltip content={<CustomTooltip />} />
                                 <Legend iconType="circle" />
@@ -237,33 +353,7 @@ const CalculatorResults = ({ results, inputs }) => {
                     </div>
                 </div>
 
-                {/* 5. Cost-Per-Order Trend */}
-                <div className="bg-white/5 border border-white/10 rounded-[32px] p-6">
-                    <h3 className="text-xl font-[Anton] uppercase text-white mb-2">Cost-Per-Order (CPO) Trend</h3>
-                    <p className="text-gray-400 text-xs mb-6 m-0">Declining CPO as organic volume scales</p>
-                    <div className="h-[300px] w-full mt-4">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={cpoData}>
-                                <defs>
-                                    <linearGradient id="colorCPO" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#ff8f27" stopOpacity={0.8} />
-                                        <stop offset="95%" stopColor="#ff8f27" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
-                                <XAxis dataKey="name" stroke="#888" tick={{ fontSize: 12 }} />
-                                <YAxis stroke="#888" tickFormatter={(v) => `$${v}`} tick={{ fontSize: 12 }} />
-                                <RechartsTooltip content={<CustomTooltip />} />
-                                <Legend iconType="circle" />
-                                <Area type="monotone" dataKey="AgencyCPO" name="SocialTK CPO" stroke="var(--color-02)" strokeWidth={3} fillOpacity={1} fill="url(#colorCPO)" />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </div>
-                </div>
-            </div>
-
-            {/* 6. Sample ROI Summary Card & 7. CTA Block */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+                {/* 5. Sampling ROI */}
                 <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 flex flex-col justify-center">
                     <h3 className="text-2xl font-[Anton] uppercase text-white mb-6 flex items-center gap-3 m-0">
                         <span className="w-8 h-8 rounded-full bg-[var(--color-04)]/20 text-[var(--color-04)] flex items-center justify-center text-sm">📦</span>
@@ -294,48 +384,45 @@ const CalculatorResults = ({ results, inputs }) => {
                         </div>
                     </div>
                 </div>
-
-                <div className="bg-[var(--neutral-03)] rounded-[32px] p-8 flex flex-col justify-center items-center text-center relative overflow-hidden">
-                    <h2 className="text-5xl max-[767px]:text-4xl font-[Anton] uppercase text-[var(--neutral-04)] mb-4 leading-none m-0 z-10">
-                        Ready to <br />Launch?
-                    </h2>
-                    <p className="text-[var(--neutral-04)]/80 font-medium mb-8 max-w-sm z-10 m-0">
-                        This calculator uses industry averages. Our team builds a forecast tailored to your exact product, margins, and goals.
-                    </p>
-
-                    <a href="https://calendly.com/sayspeedy/socialtk-discovery-call" className="group flex flex-row items-center justify-center gap-[8px]
-                        bg-[var(--neutral-04)] rounded-[40px]
-                        py-[16px] px-[32px]
-                        max-[767px]:py-[12px] max-[767px]:px-[24px]
-                        border-none cursor-pointer w-full max-w-[300px] mb-4
-                        hover:bg-[var(--color-02)] transition-colors duration-300 relative z-10 no-underline"
-                    >
-                        <p className="text-white uppercase text-[18px]
-                            max-[767px]:text-[16px] font-black transition-colors duration-300 m-0 z-10"
-                            style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                            Book Strategy Call
-                        </p>
-                        <div className="button-icon-box z-10" style={{ width: '20px', height: '20px' }}>
-                            <img src="/assets/6858db3d92470242cda7af3b_top 1.svg" alt="" className="button-icon-normal w-full invert brightness-0 transition-transform" />
-                            <img src="/assets/6858db3d92470242cda7afed_top 1 (3).svg" alt="" className="button-icon-hover w-full invert brightness-0 transition-transform" />
-                        </div>
-                    </a>
-
-                    <button
-                        onClick={exportPDF}
-                        disabled={isExporting}
-                        className="flex items-center justify-center gap-2 text-[var(--neutral-04)]/70 hover:text-[var(--neutral-04)] font-medium transition-colors w-full uppercase text-sm font-[Anton] tracking-wider no-export z-10 cursor-pointer bg-transparent border-none m-0"
-                    >
-                        <Download className="w-4 h-4" />
-                        {isExporting ? 'Generating PDF...' : 'Download Forecast (PDF)'}
-                    </button>
-                    {/* SVG graphic to match the aesthetic */}
-                    <img src="/assets/6858db3d92470242cda7aff5_Helix%20(1).svg" alt="Decoration" className="absolute -bottom-10 -right-10 w-48 opacity-20 pointer-events-none" />
-                </div>
             </div>
 
-            {/* Embedded Watermark for PDF Export */}
-            <div className="hidden print:block text-center text-gray-800 text-xs mt-12 py-4 border-t border-gray-900 w-full no-export relative top-full"> {/* Normally hidden, html2canvas will grab if we toggle a class, but we just want it to be part of the flow when export is running. Might be tricky. Easier to just inject via jsPDF if needed, or rely on absolute positioning. Let's keep it simple. */}</div>
+            {/* CTA Block */}
+            <div className="bg-[var(--neutral-03)] rounded-[32px] p-8 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                <h2 className="text-5xl max-[767px]:text-4xl font-[Anton] uppercase text-[var(--neutral-04)] mb-4 leading-none m-0 z-10">
+                    Ready to <br />Launch?
+                </h2>
+                <p className="text-[var(--neutral-04)]/80 font-medium mb-8 max-w-sm z-10 m-0">
+                    This calculator uses industry averages. Our team builds a forecast tailored to your exact product, margins, and goals.
+                </p>
+
+                <a href="https://calendly.com/sayspeedy/socialtk-discovery-call" className="group flex flex-row items-center justify-center gap-[8px]
+                    bg-[var(--neutral-04)] rounded-[40px]
+                    py-[16px] px-[32px]
+                    max-[767px]:py-[12px] max-[767px]:px-[24px]
+                    border-none cursor-pointer w-full max-w-[300px] mb-4
+                    hover:bg-[var(--color-02)] transition-colors duration-300 relative z-10 no-underline"
+                >
+                    <p className="text-white uppercase text-[18px]
+                        max-[767px]:text-[16px] font-black transition-colors duration-300 m-0 z-10"
+                        style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                        Book Strategy Call
+                    </p>
+                    <div className="button-icon-box z-10" style={{ width: '20px', height: '20px' }}>
+                        <img src="/assets/6858db3d92470242cda7af3b_top 1.svg" alt="" className="button-icon-normal w-full invert brightness-0 transition-transform" />
+                        <img src="/assets/6858db3d92470242cda7afed_top 1 (3).svg" alt="" className="button-icon-hover w-full invert brightness-0 transition-transform" />
+                    </div>
+                </a>
+
+                <button
+                    onClick={exportPDF}
+                    disabled={isExporting}
+                    className="flex items-center justify-center gap-2 text-[var(--neutral-04)]/70 hover:text-[var(--neutral-04)] font-medium transition-colors w-full uppercase text-sm font-[Anton] tracking-wider no-export z-10 cursor-pointer bg-transparent border-none m-0"
+                >
+                    <Download className="w-4 h-4" />
+                    {isExporting ? 'Generating PDF...' : 'Download Forecast (PDF)'}
+                </button>
+                <img src="/assets/6858db3d92470242cda7aff5_Helix%20(1).svg" alt="Decoration" className="absolute -bottom-10 -right-10 w-48 opacity-20 pointer-events-none" />
+            </div>
         </div>
     );
 };

@@ -9,32 +9,22 @@ const ROICalculator = () => {
     const resultsRef = useRef(null);
 
     const defaultInputs = {
-        // 1. Product Economics
-        aov: 45,
-        cogs: 15,
-        shippingCost: 5.50,
-        // 2. Fees & Commissions
-        tiktokFeePct: 6,
-        creatorCommissionPct: 20,
-        // 3. Agency Costs
-        agencyRetainer: 5000,
-        revSharePct: 5,
-        isTieredRevShare: false,
-        tier1Ceiling: 300000,
-        tier1Pct: 5,
-        tier2Ceiling: 500000,
-        tier2Pct: 3.5,
-        tier3Pct: 2,
-        minMonthlyFee: 8000,
-        // 4. Creator Seeding
-        costPerSample: 15,
-        incentiveFundSchedule: [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000],
-        sampleScheduleAgency: [40, 60, 80, 100, 120, 140, 160, 160, 160, 160, 160, 160],
-        // 5. Ad Spend
-        adSpendSchedule: [0, 3000, 3500, 5000, 8000, 10000, 12000, 14400, 17280, 20736, 24883, 29860],
-        roasSchedule: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
-        roas: 2.0,
-        adSpendGrowthPct: 20 // Used by inputs form to build array
+        // Per-month arrays (12 months) — first 8 match Spacemilk PNL Excel exactly
+        aovSchedule: [40, 40, 40, 45, 50, 50, 55, 55, 55, 55, 55, 55],
+        cogsSchedule: [11.55, 11.55, 11.55, 7, 8, 8, 8, 8, 8, 8, 8, 8],
+        shippingSchedule: [9.5, 9.5, 9.5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+        unitsSoldSchedule: [100, 300, 450, 750, 1500, 2400, 3200, 4000, 4500, 5000, 5500, 6000],
+        samplesSchedule: [200, 200, 300, 400, 400, 500, 750, 750, 750, 750, 750, 750],
+        creatorCommissionSchedule: [800, 2400, 1800, 12000, 20000, 24000, 40000, 60000, 67500, 75000, 82500, 90000],
+        platformFeeSchedule: [240, 720, 540, 3600, 6000, 7200, 12000, 18000, 14850, 16500, 18150, 19800],
+        adSpendSchedule: [2000, 4500, 9000, 15000, 25000, 30000, 35000, 50000, 55000, 60000, 65000, 70000],
+        incentiveFundSchedule: [450, 600, 1200, 2000, 3000, 4000, 5000, 7500, 8000, 8500, 9000, 9500],
+        // Month labels
+        monthLabels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6', 'Month 7', 'Month 8', 'Month 9', 'Month 10', 'Month 11', 'Month 12'],
+        // Info rows
+        ugcVolumeLabels: ['100+', '250+', '500+', '600+', '1,000+', '1,250+', '2,000+', '3000+', '3,500+', '4,000+', '4,500+', '5,000+'],
+        cpaSchedule: [20, 18, 14.5, 12.5, 11.5, 10, 8, 7.25, 6.5, 6, 5.5, 5],
+        roasSchedule: [2.0, 2.0, 2.8, 3.2, 3.5, 4.0, 5.0, 5.5, 5.5, 6.0, 6.0, 6.5],
     };
 
     const [inputs, setInputs] = useState(defaultInputs);
